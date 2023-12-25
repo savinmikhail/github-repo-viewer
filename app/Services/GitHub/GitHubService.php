@@ -1,16 +1,17 @@
 <?
 
-namespace App\Services;
+namespace App\Services\GitHub;
 
 use App\Models\Owner;
 use App\Models\Repo;
+use App\Services\GitHub\GitHubServiceInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class GitHubService
+class GitHubService implements GitHubServiceInterface
 {
     public function checkOwnerExists(string $name): bool
     {
@@ -31,9 +32,9 @@ class GitHubService
     public function saveTopRepositories(): void
     {
         $owners = $this->getOwners();
-        Log::info("Saving top repositories for owners: {json_encode($owners)}");
+        Log::info("Saving top repositories for owners: {($owners)}");
         $repositories = $this->fetchData($owners);
-        Log::info("Fetched top repositories: {json_encode($repositories)}");
+        Log::info("Fetched top repositories");
         $this->pruneOldRecords($repositories);
         Log::info("Pruned old records");
         $this->storeRecords($repositories);
@@ -59,7 +60,7 @@ class GitHubService
             
         return $repositories;
     }
-
+    
     private function pruneOldRecords(Collection $repositories)
     {
         // Prune records that no longer exist in the collection

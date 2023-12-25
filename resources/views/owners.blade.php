@@ -83,7 +83,7 @@
 </head>
 
 <body>
-    <a href="/repositories">Go to Repos</a>
+    <a href="/">Go to Repos</a>
     @php
         $success = session('success');
     @endphp
@@ -116,7 +116,7 @@
                     <td>{{ $owner->id }}</td>
                     <td>{{ $owner->name }}</td>
                     <td class="actions">
-                        <button class="delete" onclick="deleteOwner('{{ $owner->name }}')">Delete</button>
+                        <button class="delete" onclick="deleteOwner('{{ $owner->id }}')">Delete</button>
                     </td>
                 </tr>
                 @endforeach
@@ -136,17 +136,15 @@
         }
     });
 
-    function deleteOwner(ownerName) {
+    function deleteOwner(ownerId) {
         if (confirm('Are you sure you want to delete this owner?')) {
-            // Perform the AJAX request
             $.ajax({
-                url: "{{ route('owner.delete', ':ownerName') }}".replace(':ownerName', ownerName),
+                url: "{{ route('owner.delete', ':ownerId') }}".replace(':ownerId', ownerId),
                 type: 'DELETE',
                 success: function(response) {
                     location.reload();
                 },
                 error: function(xhr, status, error) {
-                    // Handle error
                     console.error(xhr.responseText);
                 }
             });
