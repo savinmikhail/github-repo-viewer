@@ -2,13 +2,13 @@
 
 namespace App\Console\Commands;
 
-use App\Services\GitHubService;
+use App\Services\GitHub\GitHubServiceInterface;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
 class FetchRepositories extends Command
 {
-    public function __construct(private GitHubService $gitHubService)
+    public function __construct(private readonly GitHubServiceInterface $gitHubService)
     {
         parent::__construct();
     }

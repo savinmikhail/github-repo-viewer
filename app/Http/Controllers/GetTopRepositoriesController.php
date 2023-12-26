@@ -6,7 +6,7 @@ use App\Services\GitHub\GitHubServiceInterface;
 
 class GetTopRepositoriesController extends Controller
 {
-    public function __construct(private GitHubServiceInterface $gitHubService)
+    public function __construct(private readonly GitHubServiceInterface $gitHubService)
     {
     }
 
