@@ -56,7 +56,7 @@ class GitHubService implements GitHubServiceInterface
                 return $response->json();
             })
             ->sortByDesc('updated_at')
-            ->limit(10);
+            ->take(10);
             
         return $repositories;
     }

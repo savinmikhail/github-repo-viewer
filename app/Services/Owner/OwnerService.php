@@ -1,6 +1,6 @@
 <?
 
-namespace App\Services;
+namespace App\Services\Owner;
 
 use App\Models\Owner;
 use App\Services\GitHub\GitHubServiceInterface;
