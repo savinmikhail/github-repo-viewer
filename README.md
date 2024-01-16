@@ -11,4 +11,4 @@ You can add github users' logins, which will be validated on existance, and then
 ```make migrate```
 
 ```php artisan schedule:work```
-some editone more
+some editone more asdfs 
